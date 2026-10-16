@@ -118,81 +118,94 @@ public class SinglyLinkedList implements LinkedList{
 
     @Override
     public Object get(int index) {
-        // Mengembalikan data pada index ke-i, head memiliki index 0
         if (index < 0 || index >= size) {
             return null;
         }
+
         Node currentNode = head;
+
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.pointer;
         }
+
         return currentNode.data;
     }
 
     @Override
     public int indexOf(Object targetData) {
-        // Mencari kemunculan pertama targetData
-        // Jika tidak ditemukan, mengembalikan -1
         Node currentNode = head;
+        int index = 0;
 
-        for (int i = 0; i < size; i++) {
-            if (currentNode.data.equals(targetData)) {
-                return i;
+        while (currentNode != null) {
+            if (currentNode.data == null
+                    ? targetData == null
+                    : currentNode.data.equals(targetData)) {
+                return index;
             }
+
             currentNode = currentNode.pointer;
+            index++;
         }
+
         return -1;
     }
 
     @Override
     public void printReverse() {
-        // Mencetak data dari tail ke head
         printReverseRecursive(head);
     }
+
     private void printReverseRecursive(Node currentNode) {
         if (currentNode == null) {
             return;
         }
+
         printReverseRecursive(currentNode.pointer);
         System.out.println(currentNode.data);
     }
 
     @Override
     public boolean remove(Object targetData) {
-        // Mencari dan menghapus node pertama dengan data = targetData
-        if (isEmpty()) {
-            return false;
-        }
-        // Jika data yang dihapus ada di head
-        if (head.data.equals(targetData)) {
-            deleteFirst();
-            return true;
-        }
         Node currentNode = head;
-        while (currentNode.pointer != null) {
-            if (currentNode.pointer.data.equals(targetData)) {
-                // Jika node yang dihapus adalah tail
-                if (currentNode.pointer == tail) {
-                    tail = currentNode;
+        Node previousNode = null;
+
+        while (currentNode != null) {
+            boolean isMatch = currentNode.data == null
+                    ? targetData == null
+                    : currentNode.data.equals(targetData);
+
+            if (isMatch) {
+                if (currentNode == head) {
+                    head = currentNode.pointer;
+                } else {
+                    previousNode.pointer = currentNode.pointer;
                 }
-                currentNode.pointer = currentNode.pointer.pointer;
+
+                if (currentNode == tail) {
+                    tail = previousNode;
+                }
+
                 size--;
                 return true;
             }
+
+            previousNode = currentNode;
             currentNode = currentNode.pointer;
         }
+
         return false;
     }
 
     @Override
     public Object[] toArray() {
-        // Mengubah seluruh data linked list menjadi array
         Object[] array = new Object[size];
         Node currentNode = head;
+
         for (int i = 0; i < size; i++) {
             array[i] = currentNode.data;
             currentNode = currentNode.pointer;
         }
+
         return array;
     }
 }
