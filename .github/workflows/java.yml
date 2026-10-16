@@ -1,0 +1,34 @@
+name: Java Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Compile Java files
+        run: javac *.java
+
+      - name: Test Node
+        run: java testNode
+
+      - name: Test Singly Linked List
+        run: java testSinglyLinkedList
+
+      - name: Test Doubly Linked List
+        run: java testDoublyLinkedList
