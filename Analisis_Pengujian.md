@@ -25,6 +25,7 @@ Pada method `toArray()`, hasil yang diharapkan setelah `remove(3)` adalah `[6, 5
 
 Secara umum, hasil pengujian SLL menunjukkan bahwa method `get()` untuk indeks valid, `indexOf()`, `printReverse()`, dan `remove()` telah memberikan hasil yang sesuai dengan fungsi yang diharapkan pada skenario yang diuji. Isi array pada SLL masih perlu diverifikasi secara langsung melalui tampilan elemen array.
 
+
 ## 2. Doubly Linked List (DLL)
 
 ### Implementasi
@@ -33,7 +34,6 @@ Pada file `DoublyLinkedList.java`, lima method tambahan diimplementasikan dengan
 Method `get()` mengambil data berdasarkan indeks dengan menelusuri node dari `head` atau `tail`, sesuai posisi indeks. Method `indexOf()` mencari kemunculan pertama data. Method `printReverse()` menelusuri node dari `tail` ke `head` menggunakan pointer `prev`. Method `remove()` menghapus node pertama yang sesuai dengan target dan menyesuaikan hubungan antarnode, sedangkan `toArray()` menyalin data dari `head` sampai `tail` ke dalam array.
 
 ### Hasil dan Analisis Pengujian
-
 Pengujian DLL menggunakan urutan operasi yang sama seperti SLL. Data 1 sampai 6 dimasukkan melalui `addFirst()`, sehingga urutan akhirnya menjadi `[6, 5, 4, 3, 2, 1]`.
 
 | Method | Hasil aktual | Analisis |
